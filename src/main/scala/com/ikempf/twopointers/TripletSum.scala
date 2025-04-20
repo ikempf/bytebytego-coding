@@ -5,14 +5,13 @@ def tripletSum(input: Vector[Int]): Set[(Int, Int, Int)] =
 
   Range
     .inclusive(0, input.size - 1)
-    .map: idx =>
+    .flatMap: idx =>
       val fixed = sorted(idx)
       twoSum(sorted.drop(idx + 1), target = -fixed)
-        .map { (a, b) => Vector(a, b, fixed).sorted }
-        .toSet
-        .map { case Vector(a, b, c) => (a, b, c) }
+        .map { (a, b) => (a, b, fixed) }
+    .map { case (a, b, c) => Vector(a, b, c).sorted }
     .toSet
-    .flatten
+    .collect { case Vector(a, b, c) => (a, b, c) }
 
 private def twoSum(input: Vector[Int], target: Int): Vector[(Int, Int)] =
   var left = 0

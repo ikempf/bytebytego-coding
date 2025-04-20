@@ -19,14 +19,12 @@ def pairSum(input: Vector[Int], target: Int): Option[(Int, Int)] =
 
   input.headOption.flatMap(h => rec(h, map(h)))
 
-def pairSum2(input: Vector[Int], target: Int): Option[(Int, Int)] =
+def pairSumSingleIteration(input: Vector[Int], target: Int): Option[(Int, Int)] =
   val map = mutable.Map.empty[Int, Int]
-  val indexed = input.zipWithIndex
 
-  for i <- input.indices do
-    map.put(input(i), i)
-    val dual = target - i
-    val res = map.get(dual)
-    if res.isDefined then return Some(res.get, i)
-    
-  None
+  boundary:
+    for i <- input.indices do
+      val n = input(i)
+      map.get(target - n).foreach(di => break(Some(di, i)))
+      map.put(n, i)
+    None

@@ -16,4 +16,16 @@ class PairSumUnsortedTest extends FunSuite {
     assertEquals(pairSum(Vector(1, 2, 2, 4), 4), Some((1, 2)))
   }
 
+  test("IsPairSumUnsortedSingleIteration should work") {
+    assertEquals(pairSumSingleIteration(Vector(-1, 3, 4, 2), 3), Some((0, 2)))
+    assertEquals(pairSumSingleIteration(Vector(-5, -2, 3, 4, 6), 7), Some((2, 3)))
+    assertEquals(pairSumSingleIteration(Vector(), 0), None)
+    assertEquals(pairSumSingleIteration(Vector(1), 1), None)
+    assertEquals(pairSumSingleIteration(Vector(2, 3), 5), Some((0, 1)))
+    assertEquals(pairSumSingleIteration(Vector(2, 2, 3), 5), Some((1, 2)))
+    assertEquals(pairSumSingleIteration(Vector(-1, 2, 3), 2), Some((0, 2)))
+    assertEquals(pairSumSingleIteration(Vector(-3, -2, -1), -5), Some((0, 1)))
+    assertEquals(pairSumSingleIteration(Vector(1, 2, 2, 4), 4), Some((1, 2)))
+  }
+
 }
