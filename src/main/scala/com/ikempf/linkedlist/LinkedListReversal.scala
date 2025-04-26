@@ -18,7 +18,7 @@ private def reverseRec[A](list: ListNode[A], prev: Option[ListNode[A]]): ListNod
 // Mutable version
 class ListNodeM[A](val value: A, var next: ListNodeM[A])
 
-def reverseRec[A](list: ListNodeM[A]): ListNodeM[A] = reverseRec(list, null)
+def reverseRecMut[A](list: ListNodeM[A]): ListNodeM[A] = reverseRec(list, null)
 
 @tailrec
 private def reverseRec[A](list: ListNodeM[A], prev: ListNodeM[A]): ListNodeM[A] =
@@ -30,5 +30,13 @@ private def reverseRec[A](list: ListNodeM[A], prev: ListNodeM[A]): ListNodeM[A] 
     list.next = prev
     reverseRec(currentNext, list)
 
-private def reverse2[A](list: ListNodeM[A], prev: ListNodeM[A]): ListNodeM[A] =
-  ???
+private def reverseMut[A](list: ListNodeM[A]): ListNodeM[A] =
+  var prev: ListNodeM[A] = null
+  var curr: ListNodeM[A] = list
+  while curr != null do
+    val next = curr.next
+    curr.next = prev
+    prev = curr
+    curr = next
+
+  prev
