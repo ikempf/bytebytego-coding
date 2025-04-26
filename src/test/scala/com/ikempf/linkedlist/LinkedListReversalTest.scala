@@ -6,13 +6,13 @@ class LinkedListReversalTest extends FunSuite {
 
   test("Reversal should work") {
     // Given
-    val list = ListNode(1, ListNode(2, ListNode(3, None)))
+    val list = ListNode(1, 2, 3, 4, 5, 6)
 
     // When
     val reversed = reverseRec(list)
 
     // Then
-    assertEquals(reversed, ListNode(3, ListNode(2, ListNode(1, None))))
+    assertEquals(reversed, ListNode(6, 5, 4, 3, 2, 1))
   }
 
   test("Reversal should work for mutable lists (recursive)") {

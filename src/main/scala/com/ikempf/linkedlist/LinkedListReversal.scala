@@ -1,19 +1,17 @@
 package com.ikempf.linkedlist
 
+import com.ikempf.linkedlist.ListNode.{Cons, Empty}
+
 import scala.annotation.tailrec
 
-case class ListNode[A](value: A, next: Option[ListNode[A]])
-object ListNode:
-  def apply[A](value: A, next: ListNode[A]): ListNode[A] =
-    ListNode(value, Some(next))
-
-def reverseRec[A](list: ListNode[A]): ListNode[A] = reverseRec(list, None)
+def reverseRec[A](list: ListNode[A]): ListNode[A] =
+  reverseRec(list, Empty)
 
 @tailrec
-private def reverseRec[A](list: ListNode[A], prev: Option[ListNode[A]]): ListNode[A] =
-  val l = ListNode(list.value, prev)
-  if list.next.isDefined then reverseRec(list.next.get, Some(l))
-  else ListNode(list.value, prev)
+private def reverseRec[A](list: ListNode[A], prev: ListNode[A]): ListNode[A] =
+  list match
+    case Cons(value, next) => reverseRec(next, Cons(value, prev))
+    case Empty             => prev
 
 // Mutable version
 class ListNodeM[A](val value: A, var next: ListNodeM[A])
