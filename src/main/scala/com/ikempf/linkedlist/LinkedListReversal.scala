@@ -13,9 +13,6 @@ private def reverseRec[A](list: ListNode[A], prev: ListNode[A]): ListNode[A] =
     case Cons(value, next) => reverseRec(next, Cons(value, prev))
     case Empty             => prev
 
-// Mutable version
-class ListNodeM[A](val value: A, var next: ListNodeM[A])
-
 def reverseRecMut[A](list: ListNodeM[A]): ListNodeM[A] = reverseRec(list, null)
 
 @tailrec
